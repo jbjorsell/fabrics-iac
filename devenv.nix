@@ -1,9 +1,11 @@
 {
   pkgs,
-  lib,
-  config,
+  inputs,
   ...
 }:
+let
+  pkgs-unstable = import inputs.nixpkgs-unstable { system = pkgs.stdenv.system; };
+in
 {
   cachix.enable = false;
 
@@ -11,7 +13,7 @@
   packages = [
     pkgs.azure-cli
     pkgs.just
-    pkgs.opentofu
+    pkgs-unstable.opentofu # Unstable needed for version 1.11 (2025-12-18)
   ];
 
   # https://devenv.sh/languages/

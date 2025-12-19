@@ -28,14 +28,13 @@ bootstrap-apply: _cache-outputs
 
 backend-config:
     mkdir -p {{fabric_dir}}
-    {{bootstrap_tf}} output -json | jq -r '"resource_group_name = \"\(.resource_group_name.value)\"\nstorage_account_name = \"\(.storage_account_name.value)\"\ncontainer_name = \"\(.container_name.value)\"\nkey = \"fabric.tfstate\""' > {{backend_file}}
+    {{bootstrap_tf}} output -json | jq -r '"resource_group_name = \"\(.resource_group_name.value)\"\nstorage_account_name = \"\(.storage_account_name.value)\"\ncontainer_name = \"\(.container_name.value)\""' > {{backend_file}}
     @echo "Created {{backend_file}}"
 
 bootstrap: bootstrap-init bootstrap-apply backend-config fabric-init
     @echo "✓ Bootstrap complete - ready to deploy environments"
 
-fabric-init:
-    [ -f {{backend_file}} ] || { echo "Run 'just backend-config' first"; exit 1; }
+fabric-init: backend-config
     {{fabric_tf}} init -backend-config=backend.hcl
 
 plan env: (_fabric-cmd "plan" env)
