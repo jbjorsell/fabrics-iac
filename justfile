@@ -1,11 +1,12 @@
 set shell := ["sh", "-c"]
 
-bootstrap_dir := "terraform/00-bootstrap"
-fabric_dir := "terraform/01-fabric"
+infra_cli := "tofu"
+bootstrap_dir := "infra/00-bootstrap"
+fabric_dir := "infra/01-fabric"
 backend_file := fabric_dir + "/backend.hcl"
 outputs_cache := ".just-cache"
-bootstrap_tf := "tofu -chdir=" + bootstrap_dir
-fabric_tf := "tofu -chdir=" + fabric_dir
+bootstrap_tf := infra_cli + " -chdir=" + bootstrap_dir
+fabric_tf := infra_cli + " -chdir=" + fabric_dir
 arm_sub_id := "ARM_SUBSCRIPTION_ID=$(cat " + outputs_cache + "/subscription_id)"
 
 default:
