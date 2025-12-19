@@ -11,13 +11,9 @@ terraform {
       source  = "hashicorp/azurerm"
       version = "~> 4.56.0"
     }
-    azapi = {
-      source  = "azure/azapi"
-      version = "~> 2.8"
-    }
     azuread = {
       source  = "hashicorp/azuread"
-      version = "~> 3.0"
+      version = "~> 3.7"
     }
     fabric = {
       source  = "microsoft/fabric"
@@ -30,10 +26,6 @@ provider "azurerm" {
   features {}
 }
 
-provider "azapi" {}
-
-provider "azuread" {}
-
 provider "fabric" {
-  # Uses Azure CLI or managed identity authentication
+  use_cli = true
 }

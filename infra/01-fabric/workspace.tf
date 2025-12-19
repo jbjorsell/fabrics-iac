@@ -1,6 +1,17 @@
+data "fabric_capacity" "main" {
+  display_name = azurerm_fabric_capacity.main.name
+
+  lifecycle {
+    postcondition {
+      condition     = self.state == "Active"
+      error_message = "Fabric Capacity is not in Active state. Please check the Fabric Capacity status."
+    }
+  }
+}
+
 resource "fabric_workspace" "main" {
   display_name = local.workspace_name
-  capacity_id  = azapi_resource.fabric_capacity.id
+  capacity_id  = data.fabric_capacity.main.id
 }
 
 resource "fabric_notebook" "data_ingestion" {

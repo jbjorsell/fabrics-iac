@@ -1,6 +1,6 @@
 set shell := ["sh", "-c"]
 
-infra_cli := "tofu"
+infra_cli := "terraform"
 bootstrap_dir := "infra/00-bootstrap"
 fabric_dir := "infra/01-fabric"
 backend_file := fabric_dir + "/backend.hcl"
@@ -22,7 +22,12 @@ bootstrap-init:
     {{bootstrap_tf}} init -backend=false -reconfigure
 
 bootstrap-sync: _cache-outputs
-    {{arm_sub_id}} {{bootstrap_tf}} apply -refresh-only -auto-approve -target=azurerm_resource_group.tfstate -target=azurerm_storage_account.tfstate -target=azurerm_storage_container.tfstate
+    @echo "Syncing with existing infrastructure (imports only, no modifications)..."
+    {{arm_sub_id}} {{bootstrap_tf}} plan
+    @echo ""
+    @echo "Review the plan above. If it shows only 'import' actions, run:"
+    @echo "  just bootstrap-apply"
+    @echo "to complete the sync."
 
 bootstrap-plan: _cache-outputs
     {{arm_sub_id}} {{bootstrap_tf}} plan
@@ -42,7 +47,7 @@ sync: bootstrap-init bootstrap-sync backend-config fabric-init
     @echo "✓ Synced to existing infrastructure - ready to deploy environments"
 
 fabric-init: backend-config
-    {{fabric_tf}} init -backend-config=backend.hcl
+    {{fabric_tf}} init -backend-config=backend.hcl -reconfigure -upgrade
 
 plan env: (_fabric-cmd "plan" env)
 
