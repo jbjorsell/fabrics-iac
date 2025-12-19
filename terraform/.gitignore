@@ -17,7 +17,7 @@ override.tf.json
 *_override.tf.json
 
 # Include tfvars files in environments directory (not sensitive in this case)
-!environments/*.tfvars
+!*/environments/*.tfvars
 
 # CLI configuration files
 .terraformrc
