@@ -1,4 +1,4 @@
-set shell := ["bash", "-euo", "pipefail", "-c"]
+set shell := ["sh", "-c"]
 
 bootstrap_dir := "terraform/00-bootstrap"
 fabric_dir := "terraform/01-fabric"
@@ -20,6 +20,9 @@ _cache-outputs:
 bootstrap-init:
     {{bootstrap_tf}} init -backend=false -reconfigure
 
+bootstrap-sync: _cache-outputs
+    {{arm_sub_id}} {{bootstrap_tf}} apply -refresh-only -auto-approve -target=azurerm_resource_group.tfstate -target=azurerm_storage_account.tfstate -target=azurerm_storage_container.tfstate
+
 bootstrap-plan: _cache-outputs
     {{arm_sub_id}} {{bootstrap_tf}} plan
 
@@ -33,6 +36,9 @@ backend-config:
 
 bootstrap: bootstrap-init bootstrap-apply backend-config fabric-init
     @echo "✓ Bootstrap complete - ready to deploy environments"
+
+sync: bootstrap-init bootstrap-sync backend-config fabric-init
+    @echo "✓ Synced to existing infrastructure - ready to deploy environments"
 
 fabric-init: backend-config
     {{fabric_tf}} init -backend-config=backend.hcl
