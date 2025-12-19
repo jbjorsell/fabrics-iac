@@ -5,6 +5,7 @@ provider "registry.opentofu.org/azure/azapi" {
   version     = "2.8.0"
   constraints = "~> 2.8"
   hashes = [
+    "h1:OHkG0B1rphuC9qxN4qXNshulMjM3gIqeJVPSvVcewcM=",
     "h1:gJpLLWwcTgHPyyqDNaXZkCfFCAywGMAgVlqg7QHRRBk=",
     "zh:048fa67ba123c6da65a7af12453328e36e1783cac1dbecc905d44ee7a1daa41c",
     "zh:08dfb8c493a99aa54ea0c00f5d2e2389aac55d70b31bfc50a38e4ab61800aca8",
@@ -25,6 +26,7 @@ provider "registry.opentofu.org/hashicorp/azuread" {
   version     = "3.7.0"
   constraints = "~> 3.0"
   hashes = [
+    "h1:/0JpbmXA3UqrSZxQQgHKyJfu0pNDACoinkLkWCkyUMg=",
     "h1:d2qjcNKfJc4OsPURsamsGc9WbL7TUPzhNASdhHTYOBQ=",
     "zh:12f3c9dc6ea10afda080aecf555af2074158f4ae63a02a76e852dbc64c6f484d",
     "zh:14b22ba28708b92ed0d9736bdfb87f8d91c081c00cb819cfa97773d8fc56c4a4",
@@ -43,6 +45,7 @@ provider "registry.opentofu.org/hashicorp/azurerm" {
   constraints = "~> 4.56.0"
   hashes = [
     "h1:/jhRJlf7cRZINGFQhcwJW7df9B0kNvjz+ymfgRWDeMs=",
+    "h1:yvzmF6sfYF/+INYH8JwI7+RChvpMoKc5hZC5yemcXcw=",
     "zh:09ff1d3def5053afa2df8c63517f2ffd859ee4b482300be36642422ceb6fcec9",
     "zh:1b1126d2bfd319726e1e5d05d03206311d989b3cc7d73830ba23397beea0c240",
     "zh:31fe8018831a3f17649ecca35122eedf237895baa26117c40f3231f95ca5aed7",
@@ -59,6 +62,7 @@ provider "registry.opentofu.org/microsoft/fabric" {
   version     = "1.7.0"
   constraints = "~> 1.7"
   hashes = [
+    "h1:+dRY30b0p64QhTrpBff/2890X0h0T5NmetKCCpoQaOM=",
     "h1:4unJMv3lifLVGPFI4P0AjsZFJxJfmzZHW4eZ4CFVtmw=",
     "zh:13136273a7469880b30f21fe5b5de8ed5bc8da403f9fc14e0b74ba495fc3790b",
     "zh:2661a5e981a6f686430d8406c147838e7b8b2d71f229534277831c3462ccc6e9",
