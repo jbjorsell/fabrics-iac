@@ -1,12 +1,18 @@
-data "fabric_capacity" "main" {
-  display_name = azurerm_fabric_capacity.main.name
+# Does not seem to work for fabric trial version 
+# data "fabric_capacity" "main" {
+#   display_name = azurerm_fabric_capacity.main.name
 
-  lifecycle {
-    postcondition {
-      condition     = self.state == "Active"
-      error_message = "Fabric Capacity is not in Active state. Please check the Fabric Capacity status."
-    }
-  }
+#   lifecycle {
+#     postcondition {
+#       condition     = self.state == "Active"
+#       error_message = "Fabric Capacity is not in Active state. Please check the Fabric Capacity status."
+#     }
+#   }
+# }
+
+# NOTE: Only fabric trial version
+data "fabric_capacity" "main" {
+  display_name = "Trial-20260101T063937Z-mb3qLdSpwEisL5_LSz7Atw"
 }
 
 resource "fabric_workspace" "main" {

@@ -1,27 +1,11 @@
 # This file is maintained automatically by "terraform init".
 # Manual edits may be lost in future updates.
 
-provider "registry.opentofu.org/hashicorp/azurerm" {
-  version     = "4.56.0"
-  constraints = "~> 4.56.0"
-  hashes = [
-    "h1:yvzmF6sfYF/+INYH8JwI7+RChvpMoKc5hZC5yemcXcw=",
-    "zh:09ff1d3def5053afa2df8c63517f2ffd859ee4b482300be36642422ceb6fcec9",
-    "zh:1b1126d2bfd319726e1e5d05d03206311d989b3cc7d73830ba23397beea0c240",
-    "zh:31fe8018831a3f17649ecca35122eedf237895baa26117c40f3231f95ca5aed7",
-    "zh:341baf877943c8ccd16dc89b8b021d1dd570684d75073f6c3f2562bc6f3bd209",
-    "zh:442c51928e1baf8448d5836c71263415d35c841b5a97b9e0bfcbd3283b7af07d",
-    "zh:4b01d92c4bfc2936d0404967939814a1b47bd0d05f5268ff1e6feb3dde9c6da8",
-    "zh:50a3ae323285d6a5502572ba7484b095ce7bd4fdbbe503056ac329989029ded3",
-    "zh:706875ce3c7ecc492c60ddf6d61e5ffb384b6728b773b5e57f5e55683dd0f811",
-    "zh:8df8c7a47283af8bce5de1a99bb0dc9fc48a15b485dc69b96590ca8667655e7a",
-  ]
-}
-
 provider "registry.terraform.io/hashicorp/azurerm" {
   version     = "4.56.0"
   constraints = "~> 4.56.0"
   hashes = [
+    "h1:5homytWJ3UD3q0wMDYB6JN9RcXM9accUEsbuRY+tVG0=",
     "h1:yZdDA6NBNc7R1BJBnYu0hSnojtHhcR14TKbzEwpXHGY=",
     "zh:04b3f7b9aa216262ed9c5e26b45cdaab61c65c48858a44f5eef2540ad8f9e225",
     "zh:110ce7e8bfb1dff4182ebce6dc086ec7e483b5337089e45cf26f448b26ecf028",

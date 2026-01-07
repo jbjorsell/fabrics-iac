@@ -60,7 +60,7 @@ dev: (apply "dev")
 prod: (apply "prod")
 
 az-login:
-    az login
+    az login --use-device-code
 
 fmt:
     {{bootstrap_tf}} fmt
@@ -73,6 +73,10 @@ validate:
 outputs env:
     {{fabric_tf}} output -var-file=environments/{{env}}.tfvars
 
+start env: (_capacity-cmd "resume" env)
+
+pause env: (_capacity-cmd "suspend" env)
+
 clean:
     rm -rf {{bootstrap_dir}}/.terraform {{fabric_dir}}/.terraform
     rm -rf {{outputs_cache}}
@@ -81,3 +85,8 @@ clean:
 _fabric-cmd cmd env: _cache-outputs
     [ -f {{fabric_dir}}/environments/{{env}}.tfvars ] || { echo "Environment '{{env}}' not found"; exit 1; }
     {{arm_sub_id}} {{fabric_tf}} {{cmd}} -var-file=environments/{{env}}.tfvars
+
+_capacity-cmd cmd env: _cache-outputs
+    az fabric capacity {{cmd}} \
+        --capacity-name $({{arm_sub_id}} {{fabric_tf}} output -raw -state={{fabric_dir}}/terraform.tfstate capacity_name) \
+        --resource-group $({{arm_sub_id}} {{fabric_tf}} output -raw -state={{fabric_dir}}/terraform.tfstate resource_group_name)
