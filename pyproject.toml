@@ -1,0 +1,25 @@
+[project]
+name = "fabrics-iac"
+version = "0.1.0"
+description = ""
+authors = [{ name = "Joachim Björsell", email = "jbjorsell@outlook.com" }]
+readme = "README.md"
+requires-python = ">=3.13.5"
+dependencies = ["pydantic==2.12.5", "polars==1.36.1"]
+
+[dependency-groups]
+dev = [
+    "ruff==0.14.10",
+    "ipykernel==7.1.0",
+    "notebook==7.5.1",
+    "pyright==1.1.407",
+    "ty==0.0.10",
+]
+
+[tool.uv]
+default-groups = ["dev"]
+
+[tool.pyright]
+include = ["src"]
+typeCheckingMode = "strict"
+stubPath = "src/typings"

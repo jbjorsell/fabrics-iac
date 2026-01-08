@@ -11,6 +11,9 @@ locals {
   capacity_name  = "fab${var.environment}cap01" # No hyphens - required by API
   workspace_name = "ws-${local.resource_prefix}"
 
+  # Path to notebooks directory
+  notebooks_path = abspath("${path.root}/../../notebooks")
+
   # Common tags applied to all resources
   common_tags = {
     Environment = var.environment

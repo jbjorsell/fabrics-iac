@@ -12,3 +12,8 @@ output "resource_group_name" {
   description = "Name of the resource group"
   value       = azurerm_resource_group.fabric.name
 }
+
+output "data_ingestion_notebook_id" {
+  description = "ID of the data ingestion notebook"
+  value       = fabric_notebook.data_ingestion.id
+}

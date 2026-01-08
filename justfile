@@ -60,7 +60,7 @@ dev: (apply "dev")
 prod: (apply "prod")
 
 az-login:
-    az login --use-device-code
+    az login
 
 fmt:
     {{bootstrap_tf}} fmt
@@ -76,6 +76,22 @@ outputs env:
 start env: (_capacity-cmd "resume" env)
 
 pause env: (_capacity-cmd "suspend" env)
+
+run-notebook notebook env: (apply env)
+    #!/usr/bin/env sh
+    workspace_id=$({{arm_sub_id}} {{fabric_tf}} output -raw -state={{fabric_dir}}/terraform.tfstate workspace_id)
+    notebook_id=$({{arm_sub_id}} {{fabric_tf}} output -raw -state={{fabric_dir}}/terraform.tfstate {{notebook}}_notebook_id)
+    python3 scripts/run_notebook.py "$workspace_id" "$notebook_id"
+
+exec-notebook notebook env: _cache-outputs
+    #!/usr/bin/env sh
+    workspace_id=$({{arm_sub_id}} {{fabric_tf}} output -raw -state={{fabric_dir}}/terraform.tfstate workspace_id)
+    notebook_id=$({{arm_sub_id}} {{fabric_tf}} output -raw -state={{fabric_dir}}/terraform.tfstate {{notebook}}_notebook_id)
+    python3 scripts/run_notebook.py "$workspace_id" "$notebook_id"
+
+run-ingestion env: (run-notebook "data_ingestion" env)
+
+exec-ingestion env: (exec-notebook "data_ingestion" env)
 
 clean:
     rm -rf {{bootstrap_dir}}/.terraform {{fabric_dir}}/.terraform

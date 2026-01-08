@@ -23,6 +23,13 @@ resource "fabric_workspace" "main" {
 resource "fabric_notebook" "data_ingestion" {
   display_name = "DataIngestion"
   workspace_id = fabric_workspace.main.id
+  format       = "ipynb"
+
+  definition = {
+    "notebook-content.ipynb" = {
+      source = "${local.notebooks_path}/data_ingestion.ipynb"
+    }
+  }
 }
 
 resource "fabric_notebook" "data_transformation" {
