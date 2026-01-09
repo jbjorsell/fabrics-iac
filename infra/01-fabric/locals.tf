@@ -19,4 +19,7 @@ locals {
     Environment = var.environment
   }
 
+  # Default Azure DevOps names when not provided
+  ado_project_name = coalesce(var.azure_devops_project_name, "Fabric Project")
+  ado_repo_name    = coalesce(var.azure_devops_repo_name, "fabric-workspace")
 }
